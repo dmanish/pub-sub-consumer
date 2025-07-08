@@ -54,7 +54,7 @@ How to Use in GitHub Codespaces
 Follow these steps to run the data processor and verify its functionality within a GitHub Codespace.
 
 1. Codespace Setup
-Fork this repository (dmanish/mini-scan-base) on GitHub.
+Fork this repository ([dmanish/mini-scan-base](https://github.com/dmanish/pub-sub-consumer)) on GitHub.
 
 Create a Codespace from your forked repository.
 
