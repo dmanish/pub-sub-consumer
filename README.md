@@ -46,7 +46,7 @@ We understand that you have other responsibilities, so if you think you’ll nee
 
 Please don’t hesitate to ask any follow-up questions for clarification.
 
-# how to run 
+# How to run 
 Censys Scan Data Processor (Go)
 This Go application processes simulated scan results from a Google Pub/Sub emulator, maintaining an up-to-date record of unique (ip, port, service) combinations in an SQLite database.
 
@@ -92,6 +92,44 @@ export PUBSUB_EMULATOR_HOST="localhost:8085"
 Run your Go application:
 
 go run main.go
+
+#How to check DB on command line
+Open a new terminal in your Codespace.
+
+Navigate to your processor/ directory:
+
+cd processor
+
+Connect to the database:
+
+sqlite3 scan_records.db
+
+Query the data:
+
+.headers on
+.mode column
+SELECT * FROM scan_records;
+
+Exit SQLite:
+
+.quit
+
+# Clean Up
+To stop the services and clean up:
+
+Press Ctrl+C in the terminal running your Go application.
+
+Press Ctrl+C in the terminal running docker compose up.
+
+(Optional) To remove Docker containers and volumes:
+
+cd /workspaces/mini-scan-base # Go to the root of the repo
+docker compose down -v
+
+(Optional) To remove the SQLite database file:
+
+rm processor/scan_records.db
+
 
 You should see logs indicating that the processor is starting, connecting to Pub/Sub, and processing messages. The retry mechanism will wait for the scan-sub subscription to become available.
 
