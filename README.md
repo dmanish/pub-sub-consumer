@@ -1,4 +1,4 @@
-# Mini-Scan
+# Problem
 
 Hello!
 
@@ -45,3 +45,54 @@ To help set expectations, we believe you should aim to take no more than 4 hours
 We understand that you have other responsibilities, so if you think you’ll need more than 5 business days, just let us know when you expect to send a reply.
 
 Please don’t hesitate to ask any follow-up questions for clarification.
+
+# how to run 
+Censys Scan Data Processor (Go)
+This Go application processes simulated scan results from a Google Pub/Sub emulator, maintaining an up-to-date record of unique (ip, port, service) combinations in an SQLite database.
+
+How to Use in GitHub Codespaces
+Follow these steps to run the data processor and verify its functionality within a GitHub Codespace.
+
+1. Codespace Setup
+Fork this repository (dmanish/mini-scan-base) on GitHub.
+
+Create a Codespace from your forked repository.
+
+Navigate to the processor/ directory within your Codespace. Your Go application code should already be present here.
+
+Initialize Go module and download dependencies in the processor/ directory:
+
+cd processor
+go mod tidy
+
+2. Start the Pub/Sub Emulator and Scanner
+Open a new terminal in your Codespace (Terminal > New Terminal).
+
+Navigate to the root of the mini-scan-base repository (e.g., /workspaces/mini-scan-base).
+
+Start the Docker Compose services:
+
+docker compose up
+
+This will spin up the Pub/Sub emulator and the scanner, which will begin publishing messages. Keep this terminal running.
+
+3. Run the Go Data Processor
+Go back to your first terminal (or open another new one).
+
+Navigate to your Go application directory:
+
+cd processor
+
+Set the Pub/Sub emulator host environment variable:
+
+export PUBSUB_EMULATOR_HOST="localhost:8085"
+
+(Codespaces automatically handles port forwarding for Docker services.)
+
+Run your Go application:
+
+go run main.go
+
+You should see logs indicating that the processor is starting, connecting to Pub/Sub, and processing messages. The retry mechanism will wait for the scan-sub subscription to become available.
+
+
