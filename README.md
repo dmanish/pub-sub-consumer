@@ -93,7 +93,7 @@ Run your Go application:
 
 go run main.go
 
-#How to check DB on command line
+# How to check DB on command line
 Open a new terminal in your Codespace.
 
 Navigate to your processor/ directory:
